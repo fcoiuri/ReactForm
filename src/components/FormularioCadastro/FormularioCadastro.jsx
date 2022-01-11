@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/';
 
 function FormularioCadastro({ OnSubmit, validateCPF }) {
     const [name, setName] = useState("");
