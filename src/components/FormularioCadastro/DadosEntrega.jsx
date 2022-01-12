@@ -113,7 +113,7 @@ const states = [
 ];
 
 function DadosEntrega() {
-    const [state, setState] = useState("Acre");
+    const [state, setState] = useState("");
 
     const handleChange = (event) => {
         setState(event.target.value);
