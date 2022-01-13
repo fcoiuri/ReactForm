@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import DadosEntrega from './DadosEntrega';
 import DadosPessoais from './DadosPessoais';
 import DadosUsuario from './DadosUsuario';
-import { Step, StepLabel, Stepper, Typography } from '@material-ui/core';
+import { Step, StepLabel, Stepper } from '@material-ui/core';
+import Ending from '../Ending';
 
-function FormularioCadastro({ submit, validateCPF }) {
+function FormularioCadastro({ submit, validations }) {
 
     const [collectedData, setCollectedData] = useState({});
     const [actualStep, setActualStep] = useState(0);
@@ -16,10 +17,10 @@ function FormularioCadastro({ submit, validateCPF }) {
     })
 
     const forms = [
-        <DadosUsuario submit={collectData}/>,
-        <DadosPessoais  submit={collectData} validateCPF={validateCPF}/>,
-        <DadosEntrega submit={collectData}/>,
-        <Typography variant="h5">Dados coletados com sucesso!</Typography>
+        <DadosUsuario submit={collectData} validations={validations}/>,
+        <DadosPessoais  submit={collectData} validations={validations}/>,
+        <DadosEntrega submit={collectData} validations={validations}/>,
+        <Ending/>
     ]
 
     function collectData(data){
@@ -47,9 +48,6 @@ function FormularioCadastro({ submit, validateCPF }) {
                 </Step>
                 <Step>
                     <StepLabel>Entrega</StepLabel>
-                </Step>
-                <Step>
-                    <StepLabel>Finalização</StepLabel>
                 </Step>
             </Stepper>
             {forms[actualStep]}

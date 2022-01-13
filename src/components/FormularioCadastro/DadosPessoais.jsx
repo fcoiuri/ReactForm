@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, TextField, Switch, FormControlLabel, Grid } from '@material-ui/core';
+import RegisterValidation from '../../contexts/RegisterValidation';
+import useErrors from '../../hooks/useErrors';
 
-function DadosPessoais({ submit, validateCPF }) {
+function DadosPessoais({ submit }) {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [cpf, setCpf] = useState("");
     const [promotions, setPromotions] = useState(true);
     const [news, setNews] = useState(true);
-    const [errors, setErrors] = useState({
-        cpf: {
-            valid: true,
-            text: ""
-        }
-    })
+    const validations = useContext(RegisterValidation);
+    const [errors, validateFields, sending] = useErrors(validations);
 
     return (
         <form 
             onSubmit={(event) => {
                 event.preventDefault();
-                submit({ name, lastName, cpf, promotions, news });
+                if(sending()){
+                    submit({ name, lastName, cpf, promotions, news });
+                }
             }}
         >
             <TextField
@@ -31,6 +31,7 @@ function DadosPessoais({ submit, validateCPF }) {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                name="name"
             />
             <TextField
                 value={lastName}
@@ -42,19 +43,18 @@ function DadosPessoais({ submit, validateCPF }) {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                name="lastname"
             />
             <TextField
                 value={cpf}
                 onChange={(event) => {
                     setCpf(event.target.value);
                 }}
-                onBlur={(event) => {
-                    const isValid = validateCPF(cpf)
-                    setErrors({ cpf: isValid })
-                }}
+                onBlur={validateFields}
                 error={!errors.cpf.valid}
                 helperText={errors.cpf.text}
                 id="cpf"
+                name="cpf"
                 label="CPF"
                 variant="outlined"
                 fullWidth
@@ -97,7 +97,7 @@ function DadosPessoais({ submit, validateCPF }) {
                 type="submit"
                 fullWidth
             >
-                Cadastrar
+                Próximo
             </Button>
         </form>
     )

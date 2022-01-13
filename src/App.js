@@ -3,28 +3,14 @@ import './App.css';
 import FormularioCadastro from './components/FormularioCadastro';
 import { Container, Typography } from '@material-ui/core';
 import '@fontsource/roboto';
-import { cpf } from 'cpf-cnpj-validator';
+import {validateCPF, validatePassword} from './models/register';
+import RegisterValidation from './contexts/RegisterValidation';
 
 function App() {
 
   function submit(dados) {
     //Posso tratar os dados da forma que quiser
     console.log(dados);
-  }
-
-  function validateCPF(num) {
-    if (!cpf.isValid(num)){
-      return {
-        valid: false,
-        text: "CPF inválido"
-      }
-    }
-    else{
-        return {
-          valid: true,
-          text: ""
-        }
-    }
   }
 
   return (
@@ -36,8 +22,12 @@ function App() {
         component="h1"
         align="center"
       >Formulário de Cadastro</Typography>
-      <FormularioCadastro submit={submit} validateCPF={validateCPF}/>
+      <RegisterValidation.Provider value={{cpf: validateCPF, 
+      password: validatePassword}}>
 
+      <FormularioCadastro submit={submit} 
+      />
+      </RegisterValidation.Provider>
     </Container>
   );
 }
