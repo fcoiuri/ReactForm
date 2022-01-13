@@ -3,7 +3,7 @@ import DadosEntrega from './DadosEntrega';
 import DadosPessoais from './DadosPessoais';
 import DadosUsuario from './DadosUsuario';
 import { Step, StepLabel, Stepper } from '@material-ui/core';
-import Ending from '../Ending';
+import Ending from './Ending';
 
 function FormularioCadastro({ submit, validations }) {
 
