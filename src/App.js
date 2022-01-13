@@ -7,7 +7,7 @@ import { cpf } from 'cpf-cnpj-validator';
 
 function App() {
 
-  function OnSubmit(dados) {
+  function submit(dados) {
     //Posso tratar os dados da forma que quiser
     console.log(dados);
   }
@@ -36,7 +36,7 @@ function App() {
         component="h1"
         align="center"
       >Formulário de Cadastro</Typography>
-      <FormularioCadastro OnSubmit={OnSubmit} validateCPF={validateCPF}/>
+      <FormularioCadastro submit={submit} validateCPF={validateCPF}/>
 
     </Container>
   );

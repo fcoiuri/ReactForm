@@ -4,27 +4,24 @@ import DadosPessoais from './DadosPessoais';
 import DadosUsuario from './DadosUsuario';
 import { Typography } from '@material-ui/core';
 
-function FormularioCadastro({ OnSubmit, validateCPF }) {
+function FormularioCadastro({ submit, validateCPF }) {
 
     const [actualStep, setActualStep] = useState(0);
-    
-    function actualForm(step){
-        switch(step){
-            case 0:
-                return <DadosUsuario />;
-            case 1:
-                return <DadosPessoais  OnSubmit={OnSubmit} validateCPF={validateCPF}/>
-            case 2:
-                return <DadosEntrega/>;
-            default:
-                return <Typography>
-                    Erro ao selecionar o Formulário
-                </Typography>
-        }
+
+    const forms = [
+        <DadosUsuario submit={next}/>,
+        <DadosPessoais  submit={next} validateCPF={validateCPF}/>,
+        <DadosEntrega submit={submit}/>
+    ]
+
+    function next(){
+        setActualStep(actualStep+1);
     }
+    
+    
     return (
         <>
-            {actualForm(actualStep)}
+            {forms[actualStep]}
         </>
     )
 }

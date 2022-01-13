@@ -1,133 +1,38 @@
 import React, { useState } from "react";
 import { TextField, Button, MenuItem } from "@material-ui/core";
 
-const states = [
-    {
-        value: 'Acre',
-        label: 'AC',
-    },
-    {
-        value: 'Alagoas',
-        label: 'AL',
-    },
-    {
-        value: 'Amapá',
-        label: 'AP',
-    },
-    {
-        value: 'Amazonas',
-        label: 'AM',
-    },
-    {
-        value: 'Bahia',
-        label: 'BA',
-    },
-    {
-        value: 'Ceará',
-        label: 'CE',
-    },
-    {
-        value: 'Distrito Federal',
-        label: 'DF',
-    },
-    {
-        value: 'Espírito Santo',
-        label: 'ES',
-    },
-    {
-        value: 'Goiás',
-        label: 'GO',
-    },
-    {
-        value: 'Maranhão',
-        label: 'MA',
-    },
-    {
-        value: 'Mato Grosso',
-        label: 'MT',
-    },
-    {
-        value: 'Mato Grosso do Sul',
-        label: 'MS',
-    },
-    {
-        value: 'Minas Gerais',
-        label: 'MG',
-    },
-    {
-        value: 'Pará',
-        label: 'PA',
-    },
-    {
-        value: 'Paraíba',
-        label: 'PB',
-    },
-    {
-        value: 'Paraná',
-        label: 'PA',
-    },
-    {
-        value: 'Pernambuco',
-        label: 'PE',
-    },
-    {
-        value: 'Piauí',
-        label: 'PI',
-    },
-    {
-        value: 'Rio de Janeiro',
-        label: 'RJ',
-    },
-    {
-        value: 'Rio Grande do Norte',
-        label: 'RN',
-    },
-    {
-        value: 'Rio Grande do Sul',
-        label: 'RS',
-    },
-    {
-        value: 'Rondônia',
-        label: 'RO',
-    },
-    {
-        value: 'Roraima',
-        label: 'RR',
-    },
-    {
-        value: 'Santa Catarina',
-        label: 'SC',
-    },
-    {
-        value: 'São Paulo',
-        label: 'SP',
-    },
-    {
-        value: 'Sergipe',
-        label: 'SE',
-    },
-    {
-        value: 'Tocantins',
-        label: 'TO',
-    },
-];
+var brazilianStates = require('brazilian-states');
 
-function DadosEntrega() {
+
+
+
+function DadosEntrega({submit}) {
     const [state, setState] = useState("");
+    const [cep, setCep] = useState("");
+    const [address, setAddress] = useState("");
+
 
     const handleChange = (event) => {
         setState(event.target.value);
-        console.log(event.target.value);
+        
       };
 
     return (
-        <form>
+        <form onSubmit={(event)=>{
+            event.preventDefault();
+            submit({cep, address, state});
+        }}
+        >
             <TextField
                 id="cep"
                 label="CEP"
                 type="number"
                 variant="outlined"
                 margin="normal"
+                value={cep}
+                onChange={(event) => {
+                    setCep(event.target.value);
+                }}
             />
             <TextField
                 id="address"
@@ -136,6 +41,10 @@ function DadosEntrega() {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                value={address}
+                onChange={(event) => {
+                    setAddress(event.target.value);
+                }}
             />
             <TextField
                 id="number"
@@ -171,12 +80,12 @@ function DadosEntrega() {
                 margin="normal"
                 >
 
-                {states.map((option)=>(
+                {brazilianStates.get().map((option)=>(
                     <MenuItem
-                        key={option.value}
-                        value={option.value}
+                        key={option.name}
+                        value={option.name}
                     >
-                        {option.label}
+                        {option.name}
                     </MenuItem>
                 ))}
 

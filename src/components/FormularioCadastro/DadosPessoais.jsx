@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel, Grid } from '@material-ui/core';
 
-function DadosPessoais({ OnSubmit, validateCPF }) {
+function DadosPessoais({ submit, validateCPF }) {
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [cpf, setCpf] = useState("");
@@ -18,7 +18,7 @@ function DadosPessoais({ OnSubmit, validateCPF }) {
         <form 
             onSubmit={(event) => {
                 event.preventDefault();
-                OnSubmit({ name, lastName, cpf, promotions, news });
+                submit({ name, lastName, cpf, promotions, news });
             }}
         >
             <TextField
