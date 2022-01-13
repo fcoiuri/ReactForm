@@ -7,9 +7,13 @@ var brazilianStates = require('brazilian-states');
 
 
 function DadosEntrega({submit}) {
-    const [state, setState] = useState("");
     const [cep, setCep] = useState("");
     const [address, setAddress] = useState("");
+    const [district, setDistrict] = useState("");
+    const [number, setNumber] = useState("");
+    const [complement, setComplement] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
 
 
     const handleChange = (event) => {
@@ -20,13 +24,14 @@ function DadosEntrega({submit}) {
     return (
         <form onSubmit={(event)=>{
             event.preventDefault();
-            submit({cep, address, state});
+            submit({cep, address, district, number,
+                complement, city, state});
         }}
         >
             <TextField
                 id="cep"
                 label="CEP"
-                type="number"
+                type="text"
                 variant="outlined"
                 margin="normal"
                 value={cep}
@@ -47,11 +52,26 @@ function DadosEntrega({submit}) {
                 }}
             />
             <TextField
+                id="district"
+                label="Bairro"
+                type="district"
+                variant="outlined"
+                margin="normal"
+                value={district}
+                onChange={(event) => {
+                    setDistrict(event.target.value);
+                }}
+            />
+            <TextField
                 id="number"
                 label="Número"
                 type="number"
                 variant="outlined"
                 margin="normal"
+                value={number}
+                onChange={(event) => {
+                    setNumber(event.target.value);
+                }}
             />
             <TextField
                 id="complement"
@@ -60,6 +80,10 @@ function DadosEntrega({submit}) {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                value={complement}
+                onChange={(event) => {
+                    setComplement(event.target.value);
+                }}
             />
             <TextField
                 id="city"
@@ -67,6 +91,10 @@ function DadosEntrega({submit}) {
                 type="text"
                 variant="outlined"
                 margin="normal"
+                value={city}
+                onChange={(event) => {
+                    setCity(event.target.value);
+                }}
             />
             <TextField
                 id="state"
@@ -88,7 +116,6 @@ function DadosEntrega({submit}) {
                         {option.name}
                     </MenuItem>
                 ))}
-
                 </TextField>
 
             <Button
