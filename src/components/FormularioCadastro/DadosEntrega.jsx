@@ -140,7 +140,6 @@ function DadosEntrega({ submit }) {
         type="text"
         variant="outlined"
         margin="normal"
-        className={classes.root}
       />
       </Grid>
       </Grid>
