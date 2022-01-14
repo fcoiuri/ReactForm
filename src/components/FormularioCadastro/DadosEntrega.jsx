@@ -1,150 +1,155 @@
 import React, { useState } from "react";
-import { TextField, Button, MenuItem } from "@material-ui/core";
-import cep from 'cep-promise';
-
-
+import { TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import cep from "cep-promise";
 import brazilianStates from "brazilian-states";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginRight: theme.spacing(1),
+    width: "95%",
+    flexGrow: 1,
+    // width: '25ch',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
 
+function DadosEntrega({ submit }) {
+  const [CEP, setCEP] = useState("");
+  const [address, setAddress] = useState("");
+  const [district, setDistrict] = useState("");
+  const [number, setNumber] = useState("");
+  const [complement, setComplement] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
 
+  const classes = useStyles();
 
-function DadosEntrega({submit}) {
-    const [CEP, setCEP] = useState("");
-    const [address, setAddress] = useState("");
-    const [district, setDistrict] = useState("arroz");
-    const [number, setNumber] = useState("");
-    const [complement, setComplement] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-
-
-    const handleChange = (event) => {
-        setState(event.target.value);
-        console.log(event.target)
-        
-        
-      };
-
-    return (
-        <form onSubmit={(event)=>{
-            event.preventDefault();
-            submit({CEP, address, district, number,
-                complement, city, state});
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        submit({ CEP, address, district, number, complement, city, state });
+      }}
+    >
+      <Grid item xs={6}>
+        <TextField
+          id="cep"
+          label="CEP"
+          fullWidth
+          type="text"
+          variant="outlined"
+          margin="normal"
+          value={CEP}
+          onChange={(event) => {
+            cep(event.target.value).then((value) => {
+              setAddress(value.street);
+              setDistrict(value.neighborhood);
+              setCity(value.city);
+              let codeState = value.state;
+              let nameState = brazilianStates.get(codeState).name;
+              setState(nameState);
+            });
+            setCEP(event.target.value);
+          }}
+        />
+      </Grid>
+      <TextField
+        id="address"
+        label="Endereço"
+        type="text"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={address}
+        onChange={(event) => {
+          setAddress(event.target.value);
         }}
-        >
-            <TextField
-                id="cep"
-                label="CEP"
-                type="text"
-                variant="outlined"
-                margin="normal"
-                value={CEP}
-                onChange={(event) => {   
-                    // let result = cep(event.target.value).info();
-                    // console.log(result.then());
-                    // setCEP(event.target.value);
-                    cep(event.target.value).then(
-                        (value)=>{
-                            setAddress(value.street);
-                            setDistrict(value.neighborhood);
-                            setCity(value.city);
-                            setState(value.state);
-                            
-                        }
-                    )
-                   setCEP(event.target.value);
-                }}
-            />
-            <TextField
-                id="address"
-                label="Endereço"
-                type="text"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={address}
-                onChange={(event) => {
-                    setAddress(event.target.value);
-                }}
-            />
-            <TextField
-                id="district"
-                label="Bairro"
-                type="district"
-                variant="outlined"
-                margin="normal"
-                value={district}
-                onChange={(event) => {
-                    setDistrict(event.target.value);
-                }}
-            />
-            <TextField
-                id="number"
-                label="Número"
-                type="number"
-                variant="outlined"
-                margin="normal"
-                value={number}
-                onChange={(event) => {
-                    setNumber(event.target.value);
-                }}
-            />
-            <TextField
-                id="complement"
-                label="Complemento"
-                type="text"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={complement}
-                onChange={(event) => {
-                    setComplement(event.target.value);
-                }}
-            />
-            <TextField
-                id="city"
-                label="Cidade"
-                type="text"
-                variant="outlined"
-                margin="normal"
-                value={city}
-                onChange={(event) => {
-                    setCity(event.target.value);
-                }}
-            />
-            <TextField
-                id="state"
-                select
-                label="Selecione"
-                value={state}
-                onChange={handleChange}
-                helperText="Selecione seu estado"
-                type="text"
-                variant="outlined"
-                margin="normal"
-                name={state}
-                >
+      />
+      <Grid container spacing={1}>
+        <Grid item xs={9}>
+          <TextField
+            id="district"
+            label="Bairro"
+            type="district"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={district}
+            onChange={(event) => {
+              setDistrict(event.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            id="number"
+            fullWidth
+            label="Número"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={number}
+            onChange={(event) => {
+              setNumber(event.target.value);
+            }}
+          />
+        </Grid>
+      </Grid>
 
-                {brazilianStates.get().map((option)=>(
-                    <MenuItem
-                        key={option.name}
-                        value={option.code}
-                    >
-                        {option.name}
-                    </MenuItem>
-                ))}
-                </TextField>
+      <TextField
+        id="complement"
+        label="Complemento"
+        type="text"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={complement}
+        onChange={(event) => {
+          setComplement(event.target.value);
+        }}
+      />
+      <Grid container spacing={1}>
+        <Grid item xs={7}>
+      <TextField
+        id="city"
+        label="Cidade"
+        type="text"
+        variant="outlined"
+        margin="normal"
+        className={classes.root}
+        value={city}
+        onChange={(event) => {
+          setCity(event.target.value);
+        }}
+      />
+      </Grid>
+      <Grid item xs={5}>
+      <TextField
+        id="state"
+        label="Estado"
+        value={state}
+        onChange={(event) => {
+          setState(event.target.value);
+        }}
+        type="text"
+        variant="outlined"
+        margin="normal"
+        className={classes.root}
+      />
+      </Grid>
+      </Grid>
 
-            <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-            >
-                Finalizar Cadastro
-            </Button>
-        </form>
-    )
+      <Button variant="contained" color="primary" type="submit" fullWidth>
+        Finalizar Cadastro
+      </Button>
+    </form>
+  );
 }
 
 export default DadosEntrega;

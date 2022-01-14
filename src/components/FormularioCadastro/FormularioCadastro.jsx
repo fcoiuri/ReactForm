@@ -36,7 +36,7 @@ function FormularioCadastro({ submit, validations }) {
 
   return (
     <>
-      <Stepper activeStep={actualStep}>
+       <Stepper activeStep={actualStep}>
         <Step>
           <StepLabel>Login</StepLabel>
         </Step>
@@ -47,7 +47,7 @@ function FormularioCadastro({ submit, validations }) {
           <StepLabel>Entrega</StepLabel>
         </Step>
       </Stepper>
-      {forms[actualStep]}
+      {forms[actualStep]} 
     </>
   );
 }
