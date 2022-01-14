@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { TextField, Button, MenuItem } from "@material-ui/core";
+import cep from 'cep-promise';
 
-var brazilianStates = require('brazilian-states');
+
+import brazilianStates from "brazilian-states";
 
 
 
 
 function DadosEntrega({submit}) {
-    const [cep, setCep] = useState("");
+    const [CEP, setCEP] = useState("");
     const [address, setAddress] = useState("");
-    const [district, setDistrict] = useState("");
+    const [district, setDistrict] = useState("arroz");
     const [number, setNumber] = useState("");
     const [complement, setComplement] = useState("");
     const [city, setCity] = useState("");
@@ -18,13 +20,15 @@ function DadosEntrega({submit}) {
 
     const handleChange = (event) => {
         setState(event.target.value);
+        console.log(event.target)
+        
         
       };
 
     return (
         <form onSubmit={(event)=>{
             event.preventDefault();
-            submit({cep, address, district, number,
+            submit({CEP, address, district, number,
                 complement, city, state});
         }}
         >
@@ -34,9 +38,21 @@ function DadosEntrega({submit}) {
                 type="text"
                 variant="outlined"
                 margin="normal"
-                value={cep}
-                onChange={(event) => {
-                    setCep(event.target.value);
+                value={CEP}
+                onChange={(event) => {   
+                    // let result = cep(event.target.value).info();
+                    // console.log(result.then());
+                    // setCEP(event.target.value);
+                    cep(event.target.value).then(
+                        (value)=>{
+                            setAddress(value.street);
+                            setDistrict(value.neighborhood);
+                            setCity(value.city);
+                            setState(value.state);
+                            
+                        }
+                    )
+                   setCEP(event.target.value);
                 }}
             />
             <TextField
@@ -106,12 +122,13 @@ function DadosEntrega({submit}) {
                 type="text"
                 variant="outlined"
                 margin="normal"
+                name={state}
                 >
 
                 {brazilianStates.get().map((option)=>(
                     <MenuItem
                         key={option.name}
-                        value={option.name}
+                        value={option.code}
                     >
                         {option.name}
                     </MenuItem>
