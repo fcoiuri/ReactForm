@@ -32,6 +32,10 @@ function DadosPessoais({ submit }) {
                 fullWidth
                 margin="normal"
                 name="name"
+                onBlur={validateFields}
+                error={!errors.name.valid}
+                helperText={errors.name.text}
+                required
             />
             <TextField
                 value={lastName}
@@ -58,6 +62,7 @@ function DadosPessoais({ submit }) {
                 label="CPF"
                 variant="outlined"
                 fullWidth
+                required
             />
             <Grid container justifyContent="flex-end" >
 
