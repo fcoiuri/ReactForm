@@ -23,7 +23,9 @@ function App() {
         align="center"
       >Formulário de Cadastro</Typography>
       <RegisterValidation.Provider value={{cpf: validateCPF, 
-      password: validatePassword}}>
+      password: validatePassword,
+      name: validatePassword
+      }}>
 
       <FormularioCadastro submit={submit} 
       />

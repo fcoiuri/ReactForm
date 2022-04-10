@@ -18,10 +18,10 @@ function validateCPF(num) {
 }
 
 function validatePassword(password) {
-    if (password.length <= 4 || password.length > 72) {
+    if (password.length <= 3 || password.length > 72) {
         return {
             valid: false,
-            text: "Senha deve ter entre 5 e 72 dígitos"
+            text: "Senha deve ter entre 4 e 72 dígitos"
         }
     }
     else {
