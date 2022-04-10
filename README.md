@@ -3,8 +3,13 @@
 * React;
 * Material-UI.
 
-## Home Page
-![Home Page](/images/HomePage.JPG)
+## Login
+![Login](/images/Login.JPG)
+
+## Dados Pessoais
+![Personal](/images/Personal.JPG)
+## Dados de Entrega
+![Delivery](/images/Delivery.JPG)
 
 ## Dados apresentados no Console
-![Home Page](/images/View.JPG)
+![Console](/images/View.JPG)
