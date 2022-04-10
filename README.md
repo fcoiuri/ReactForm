@@ -4,12 +4,12 @@
 * Material-UI.
 
 ## Login
-![Login](/images/Login.JPG)
+![Login](/images/Login.png)
 
 ## Dados Pessoais
-![Personal](/images/Personal.JPG)
+![Personal](/images/Personal.png)
 ## Dados de Entrega
-![Delivery](/images/Delivery.JPG)
+![Delivery](/images/Delivery.png)
 
 ## Dados apresentados no Console
-![Console](/images/View.JPG)
+![Console](/images/View.png)
