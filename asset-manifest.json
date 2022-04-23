@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/ReactForm/static/css/main.8ab6f918.chunk.css",
+    "main.js": "/ReactForm/static/js/main.a05a2a13.chunk.js",
+    "main.js.map": "/ReactForm/static/js/main.a05a2a13.chunk.js.map",
+    "runtime-main.js": "/ReactForm/static/js/runtime-main.c9dde725.js",
+    "runtime-main.js.map": "/ReactForm/static/js/runtime-main.c9dde725.js.map",
+    "static/css/2.d047d057.chunk.css": "/ReactForm/static/css/2.d047d057.chunk.css",
+    "static/js/2.58ad6b03.chunk.js": "/ReactForm/static/js/2.58ad6b03.chunk.js",
+    "static/js/2.58ad6b03.chunk.js.map": "/ReactForm/static/js/2.58ad6b03.chunk.js.map",
+    "index.html": "/ReactForm/index.html",
+    "precache-manifest.5c6cfe6d8d9a8be1da914437af11b40e.js": "/ReactForm/precache-manifest.5c6cfe6d8d9a8be1da914437af11b40e.js",
+    "service-worker.js": "/ReactForm/service-worker.js",
+    "static/css/2.d047d057.chunk.css.map": "/ReactForm/static/css/2.d047d057.chunk.css.map",
+    "static/css/main.8ab6f918.chunk.css.map": "/ReactForm/static/css/main.8ab6f918.chunk.css.map",
+    "static/js/2.58ad6b03.chunk.js.LICENSE.txt": "/ReactForm/static/js/2.58ad6b03.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/ReactForm/static/media/roboto-vietnamese-400-normal.756af8e5.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c9dde725.js",
+    "static/css/2.d047d057.chunk.css",
+    "static/js/2.58ad6b03.chunk.js",
+    "static/css/main.8ab6f918.chunk.css",
+    "static/js/main.a05a2a13.chunk.js"
+  ]
+}
